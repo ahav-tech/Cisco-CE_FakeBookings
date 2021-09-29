@@ -39,7 +39,13 @@
             />
           </div>
           <div class="three columns" style="align-self: flex-end">
-            <input type="button" value="Connect" id="endpoint-connect" />
+            <input
+              class="button-primary"
+              type="button"
+              value="Connect"
+              id="endpoint-connect"
+              disabled
+            />
           </div>
         </form>
 
@@ -52,11 +58,25 @@
         >
           <h3>Entries</h3>
           <div id="entry-list" style="display: flex; flex-direction: column">
-            <button>Test 1</button>
-            <button>Test 2</button>
+            <div
+              class="entry-buttons row"
+              style="display: flex; justify-content: space-between; gap: 1rem"
+            >
+              <button id="entry-select-#" style="flex-grow: 1">Test 1</button>
+              <button id="entry-delete-#" style="padding: 0 1.5rem">X</button>
+            </div>
+            <div
+              class="entry-buttons row"
+              style="display: flex; justify-content: space-between; gap: 1rem"
+            >
+              <button id="entry-select-#" style="flex-grow: 1">Test 2</button>
+              <button id="entry-delete-#" style="padding: 0 1.5rem">X</button>
+            </div>
           </div>
           <button id="entry-add" style="font-size: 3rem">+</button>
-          <button class="button-primary" style="margin-top: auto">Send</button>
+          <button class="button-primary" style="margin-top: auto" disabled>
+            Send
+          </button>
         </div>
         <div class="nine columns">
           <h3>Booking Details</h3>

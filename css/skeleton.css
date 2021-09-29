@@ -388,12 +388,12 @@ hr {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /* Self Clearing Goodness */
-.container:after,
+/* .container:after,
 .row:after,
 .u-cf {
   content: "";
   display: table;
-  clear: both; }
+  clear: both; } */
 
 
 /* Media Queries
