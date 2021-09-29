@@ -1,14 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script src="./app.js" defer></script>
-  <title>Cisco-CE_FakeBookings</title>
-</head>
-<body>
-  
-</body>
+    <link
+      href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/skeleton.css" />
+
+    <script src="./app.js" defer></script>
+    <title>Cisco-CE_FakeBookings</title>
+  </head>
+  <body>
+    <div class="container" style="margin-top: 4rem">
+      <div class="endpoint">
+        <h3>Endpoint</h3>
+        <form style="display: flex; flex-wrap: wrap">
+          <div class="three columns">
+            <label for="endpoint-address">IP Address</label>
+            <input type="text" name="endpoint-address" id="endpoint-address" />
+          </div>
+          <div class="three columns">
+            <label for="endpoint-user">User</label>
+            <input type="text" name="endpoint-user" id="endpoint-user" />
+          </div>
+          <div class="three columns">
+            <label for="endpoint-password">Password</label>
+            <input
+              type="text"
+              name="endpoint-password"
+              id="endpoint-password"
+            />
+          </div>
+          <div class="three columns" style="align-self: flex-end">
+            <input type="button" value="Connect" id="endpoint-connect" />
+          </div>
+        </form>
+
+        <hr />
+      </div>
+      <div class="entries">
+        <div
+          class="three columns"
+          style="display: flex; flex-direction: column"
+        >
+          <h3>Entries</h3>
+          <div id="entry-list" style="display: flex; flex-direction: column">
+            <button>Test 1</button>
+            <button>Test 2</button>
+          </div>
+          <button id="entry-add" style="font-size: 3rem">+</button>
+          <button class="button-primary" style="margin-top: auto">Send</button>
+        </div>
+        <div class="nine columns">
+          <h3>Booking Details</h3>
+          <form class="booking-entry">
+            <div class="six columns">
+              <label for="booking-id">ID</label>
+              <input
+                type="number"
+                name="booking-id"
+                id="booking-id"
+                value="1"
+              />
+              <label for="booking-number">Number/address</label>
+              <input
+                type="text"
+                name="booking-number"
+                id="booking-number"
+                value="number@example.com"
+              />
+              <label for="booking-organiser">Organiser</label>
+              <input
+                type="text"
+                name="booking-organiser"
+                id="booking-organiser"
+                value="John Doe"
+              />
+              <label for="booking-protocol">Protocol</label>
+              <input
+                type="text"
+                name="booking-protocol"
+                id="booking-protocol"
+                value="SIP"
+              />
+            </div>
+            <div class="six columns">
+              <label for="booking-time-duration">Time - duration (mins)</label>
+              <input
+                type="number"
+                name="booking-time-duration"
+                id="booking-time-duration"
+                value="30"
+              />
+              <label for="booking-time-buffer">Time - end buffer</label>
+              <input
+                type="number"
+                name="booking-time-buffer"
+                id="booking-time-buffer"
+                value="20"
+              />
+              <label for="booking-time-start">Time - Start</label>
+              <input
+                type="time"
+                name="booking-time-start"
+                id="booking-time-start"
+              />
+              <label for="booking-date-start">Date - Start</label>
+              <input
+                type="date"
+                name="booking-date-start"
+                id="booking-date-start"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
