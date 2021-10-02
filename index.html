@@ -13,7 +13,10 @@
 
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/skeleton.css" />
+    <link rel="stylesheet" href="css/extra.css" />
 
+    <script src="./endpoint.js" defer></script>
+    <script src="./booking.js" defer></script>
     <script src="./app.js" defer></script>
     <title>Cisco-CE_FakeBookings</title>
   </head>
@@ -44,7 +47,6 @@
             </button>
           </div>
         </form>
-
         <hr />
       </div>
       <div class="entries">
@@ -53,21 +55,18 @@
           style="display: flex; flex-direction: column"
         >
           <h3>Entries</h3>
-          <div id="entry-list" style="display: flex; flex-direction: column">
-            <div
-              class="entry-buttons row"
-              style="display: flex; justify-content: space-between; gap: 1rem"
-            >
-              <button id="entry-select-1" style="flex-grow: 1">Test 1</button>
-              <button id="entry-delete-1" style="padding: 0 1.5rem">X</button>
-            </div>
+          <div class="row">
+            <button id="entry-delete" class="six columns" style="font-size: 3rem">-</button>
+            <button id="entry-add" class="six columns"  style="font-size: 3rem">+</button>
           </div>
-          <button id="entry-add" style="font-size: 3rem">+</button>
+          <div id="entry-list" style="display: flex; flex-direction: column">
+            <!-- Entries buttons added here -->
+          </div>
+
           <button
             id="entry-send"
             class="button-primary"
             style="margin-top: auto"
-            disabled
           >
             Send
           </button>
