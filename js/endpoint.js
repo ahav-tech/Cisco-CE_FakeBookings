@@ -1,3 +1,6 @@
+//
+// Definitions
+//
 let endpoint = null;
 let endpointConnected = false;
 
@@ -10,8 +13,12 @@ const formEndpointUser = document.getElementById("endpoint-user");
 const formEndpointPassword = document.getElementById("endpoint-password");
 const btnEndpointConnect = document.getElementById("endpoint-connect");
 
+//
+// Events
+//
 btnEndpointConnect.addEventListener("click", (e) => {
   e.preventDefault();
+  // TODO: add input validation
   endpointConnect();
 });
 
@@ -21,6 +28,9 @@ window.addEventListener("beforeunload", (e) => {
   }
 });
 
+//
+// Functions
+//
 function b64EncodeUnicode(str) {
   return btoa(
     encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
@@ -67,49 +77,8 @@ function endpointEventOpen(e) {
   endpointConnected = true;
   UI.sendBtnVisibility(true);
   btnEndpointConnect.innerText = "Disconnect";
-  // Old hardcoded test stuff
-  console.log(
-    JSON.stringify({
-      jsonrpc: "2.0",
-      id: 101,
-      method: "xCommand/Bookings/Put",
-      params: {
-        body: bookings,
-      },
-    })
-  );
-  endpoint.send(
-    JSON.stringify({
-      jsonrpc: "2.0",
-      id: 101,
-      method: "xCommand/Bookings/Put",
-      params: {
-        body: bookings,
-      },
-    })
-  );
 
-  endpoint.send(
-    JSON.stringify({
-      jsonrpc: "2.0",
-      id: 102,
-      method: "xCommand/Bookings/List",
-    })
-  );
-
-  // endpoint.send(
-  //   JSON.stringify({
-  //     jsonrpc: "2.0",
-  //     id: 113,
-  //     method: "xFeedback/Subscribe",
-  //     params: {
-  //       // Query: ["Status", "Standby", "State"],
-  //       Query: ["Status", "Bookings"],
-  //       NotifyCurrentValue: true,
-  //     },
-  //   })
-  // );
-
+  // Leaving this hardcoded subscription in as it gives a command example and also debugging of comms
   endpoint.send(
     JSON.stringify({
       jsonrpc: "2.0",

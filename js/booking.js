@@ -1,29 +1,38 @@
+//
+// Classes
+//
+class Organizer {
+  Name;
+}
+
+class Time {
+  Duration;
+  EndTimeBuffer;
+  StartTime;
+}
+
 class Booking {
-  title;
-  id;
-  number;
-  organizer;
-  protocol;
-  timeDuration;
-  timeBuffer;
-  timeStart;
-  dateStart;
+  Id;
+  Number;
+  Organizer;
+  Protocol;
+  Time;
+  Title;
 
   constructor(id) {
-    this.id = id;
+    this.Id = String(id);
+    this.Organizer = new Organizer();
+    this.Time = new Time();
   }
 
   setDefaults() {
-    const now = new Date();
-
-    this.title = "Test Booking";
-    // id set in constructor
-    this.number = "number@example.com";
-    this.organizer = "Test User";
-    this.protocol = "SIP";
-    this.timeDuration = "30";
-    this.timeBuffer = "20";
-    this.timeStart = timeLocalString(now);
-    this.dateStart = dateLocalString(now);
+    // Id set in constructor
+    this.Number = "number@example.com";
+    this.Organizer.Name = "Test User";
+    this.Protocol = "SIP";
+    this.Time.Duration = 30;
+    this.Time.EndTimeBuffer = 20;
+    this.Time.StartTime = new Date();
+    this.Title = "Test Booking";
   }
 }

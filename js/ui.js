@@ -1,3 +1,6 @@
+//
+// Classes
+//
 class UI {
   static updateBookingBtns() {
     entryList.innerHTML = "";
@@ -25,9 +28,9 @@ class UI {
 
   static addBookingBtn(booking) {
     const row = document.createElement("button");
-    row.id = `booking-${booking.id}`;
+    row.id = `booking-${booking.Id}`;
     row.classList.add("booking-btn", "twelve", "columns");
-    row.innerText = `${booking.id}`;
+    row.innerText = `${booking.Id}`;
 
     entryList.appendChild(row);
   }
@@ -41,15 +44,15 @@ class UI {
   }
 
   static displayBookingDetails(booking) {
-    formBookingTitle.value = booking.title;
-    formBookingId.value = booking.id;
-    formBookingNumber.value = booking.number;
-    formBookingOrganizer.value = booking.organizer;
-    formBookingProtocol.value = booking.protocol;
-    formBookingTimeDuration.value = booking.timeDuration;
-    formBookingTimeBuffer.value = booking.timeBuffer;
-    formBookingTimeStart.value = booking.timeStart;
-    formBookingDateStart.value = booking.dateStart;
+    formBookingTitle.value = booking.Title;
+    formBookingId.value = booking.Id;
+    formBookingNumber.value = booking.Number;
+    formBookingOrganizer.value = booking.Organizer.Name;
+    formBookingProtocol.value = booking.Protocol;
+    formBookingTimeDuration.value = booking.Time.Duration;
+    formBookingTimeBuffer.value = booking.Time.EndTimeBuffer;
+    formBookingTimeStart.value = timeToLocalString(booking.Time.StartTime);
+    formBookingDateStart.value = dateToLocalString(booking.Time.StartTime);
   }
 
   static formClear() {

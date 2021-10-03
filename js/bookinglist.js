@@ -1,3 +1,6 @@
+//
+// Classes
+//
 class BookingList {
   static getBookings() {
     let bookings;
@@ -15,9 +18,9 @@ class BookingList {
     localStorage.setItem("bookings", JSON.stringify(bookings));
   }
 
-  static updateBooking(bookingNum, booking) {
+  static updateBooking(bookingNum, newBooking) {
     const bookings = BookingList.getBookings();
-    bookings[bookingNum] = booking;
+    bookings[bookingNum] = newBooking;
     localStorage.setItem("bookings", JSON.stringify(bookings));
   }
 
@@ -29,13 +32,29 @@ class BookingList {
 
   static getNumBookings() {
     const bookings = BookingList.getBookings();
-    console.log(bookings.length);
     return bookings.length;
+  }
+
+  static getBookingListString() {
+    const bookings = JSON.stringify({
+      Bookings: BookingList.getBookings(),
+    });
+    const commandString = JSON.stringify({
+      jsonrpc: "2.0",
+      id: Math.ceil(Math.random() * 100),
+      method: "xCommand/Bookings/Put",
+      params: {
+        body: bookings,
+      },
+    });
+
+    return commandString;
   }
 }
 
-const date = new Date();
-
+//
+// Definitions
+//
 const entryList = document.getElementById("entry-list");
 const btnEntryAdd = document.getElementById("entry-add");
 const btnEntryDelete = document.getElementById("entry-delete");
@@ -110,13 +129,15 @@ btnEntryDelete.addEventListener("click", () => {
 
 // Send bookings
 btnEntrySend.addEventListener("click", () => {
-  // TODO
-  console.log("send");
+  if(endpoint) {
+    endpoint.send(BookingList.getBookingListString());
+  }
 });
 
+// Change booking details
 formBooking.querySelectorAll("input").forEach((element) => {
   element.addEventListener("change", (e) => {
-    formToBookingData(selectedBooking - 1);
+    formToBookingData(selectedBooking);
   });
 });
 
@@ -125,10 +146,12 @@ formBooking.querySelectorAll("input").forEach((element) => {
 //
 
 // Make local data compatible with form value
-function dateLocalString(date) {
-  let yyyy = date.getFullYear();
-  let mm = date.getMonth() + 1;
-  let dd = date.getDate();
+function dateToLocalString(date) {
+  const tempDate = new Date(date);
+
+  let yyyy = tempDate.getFullYear();
+  let mm = tempDate.getMonth() + 1;
+  let dd = tempDate.getDate();
   if (dd < 10) {
     dd = "0" + dd;
   }
@@ -139,10 +162,25 @@ function dateLocalString(date) {
   return `${yyyy}-${mm}-${dd}`;
 }
 
+function dateTimeFromLocalString(dateString, timeString) {
+  const tempDate = new Date();
+
+  tempDate.setFullYear(dateString.substr(0, 4));
+  tempDate.setMonth(dateString.substr(5, 2) - 1);
+  tempDate.setDate(dateString.substr(8, 2));
+
+  tempDate.setHours(timeString.substr(0, 2));
+  tempDate.setMinutes(timeString.substr(3, 2));
+
+  return tempDate;
+}
+
 // Make local time compatible with form value
-function timeLocalString(date) {
-  let hh = date.getHours();
-  let mm = date.getMinutes();
+function timeToLocalString(date) {
+  const tempDate = new Date(date);
+
+  let hh = tempDate.getHours();
+  let mm = tempDate.getMinutes();
 
   if (hh < 10) {
     hh = "0" + hh;
@@ -154,22 +192,24 @@ function timeLocalString(date) {
   return `${hh}:${mm}`;
 }
 
-// Send form entries to targetting booking in array
-function formToBookingData(target) {
+// Send form entries to booking in array
+function formToBookingData(bookingId) {
   // set details for selected entry
-  if (target) {
-    const booking = new Booking(target);
+  if (bookingId) {
+    const booking = new Booking(bookingId - 1);
 
-    booking.title = formBookingTitle.value;
-    booking.id = formBookingId.value;
-    booking.number = formBookingNumber.value;
-    booking.organizer = formBookingOrganizer.value;
-    booking.protocol = formBookingProtocol.value;
-    booking.timeDuration = formBookingTimeDuration.value;
-    booking.timeBuffer = formBookingTimeBuffer.value;
-    booking.timeStart = formBookingTimeStart.value;
-    booking.dateStart = formBookingDateStart.value;
+    booking.Title = formBookingTitle.value;
+    booking.Id = String(formBookingId.value);
+    booking.Number = formBookingNumber.value;
+    booking.Organizer.Name = formBookingOrganizer.value;
+    booking.Protocol = formBookingProtocol.value;
+    booking.Time.Duration = Number(formBookingTimeDuration.value);
+    booking.Time.EndTimeBuffer = Number(formBookingTimeBuffer.value);
+    booking.Time.StartTime = dateTimeFromLocalString(
+      formBookingDateStart.value,
+      formBookingTimeStart.value
+    );
 
-    BookingList.updateBooking(target, booking);
+    BookingList.updateBooking(bookingId - 1, booking);
   }
 }
