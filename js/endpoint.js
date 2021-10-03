@@ -1,4 +1,5 @@
 let endpoint = null;
+let endpointConnected = false;
 
 const url = "";
 const username = "";
@@ -15,10 +16,10 @@ btnEndpointConnect.addEventListener("click", (e) => {
 });
 
 window.addEventListener("beforeunload", (e) => {
-  if(endpoint !== null) {
+  if (endpoint !== null) {
     endpoint.close();
   }
-})
+});
 
 function b64EncodeUnicode(str) {
   return btoa(
@@ -63,6 +64,8 @@ function endpointConnect() {
 
 function endpointEventOpen(e) {
   console.log("Endpoint connected");
+  endpointConnected = true;
+  UI.sendBtnVisibility(true);
   btnEndpointConnect.innerText = "Disconnect";
   // Old hardcoded test stuff
   console.log(
@@ -132,6 +135,8 @@ function endpointEventMessage(e) {
 
 function endpointEventClose(e) {
   console.log("Endpoint disconnected");
+  endpointConnected = false;
+  UI.sendBtnVisibility(false);
   btnEndpointConnect.innerText = "Connect";
 
   endpoint = null;
