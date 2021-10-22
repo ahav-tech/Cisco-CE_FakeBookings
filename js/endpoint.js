@@ -18,8 +18,10 @@ const btnEndpointConnect = document.getElementById("endpoint-connect");
 //
 btnEndpointConnect.addEventListener("click", (e) => {
   e.preventDefault();
-  // TODO: add input validation
-  endpointConnect();
+  // Basic input vaidation; to be fancy I could change the visual state of the button if the inputs are valid or not
+  if (formEndpointAddress.value && formEndpointUser.value) {
+    endpointConnect();
+  }
 });
 
 window.addEventListener("beforeunload", (e) => {
